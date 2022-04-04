@@ -8,7 +8,6 @@ import sqlite3
 from hachoir.field import Parser, CString, UInt8, UInt16, UInt32, String, Bytes,RawBytes,FieldSet
 from hachoir.stream import StringInputStream, BIG_ENDIAN
 
-DATA_FILE = 'mmm.sqlite'
 
 
 
@@ -137,8 +136,8 @@ class SQLite_hand(Parser):
 
 
 def main(argv):
-    DATA_FILE=argv[0]
-    file_handle=open(DATA_FILE,'rb')
+    DATA_FILE = argv[0]
+    file_handle = open(DATA_FILE, 'rb')
     stream = StringInputStream(file_handle.read(4096))
     print("parser No.1 page hand")
     point = SQLite_hand(stream)
@@ -146,7 +145,7 @@ def main(argv):
         print("%s) %s=%s" % (field.address, field.name, field.display))
     for k in range(20):
         stream = StringInputStream(file_handle.read(4096))
-        print("\nparser No.%d page"%(k+2))
+        print("\nparser No.%d page" % (k+2))
         point = SQLite_page(stream)
         for field in point:
             print("%s) %s=%s" % (field.address, field.name, field.display))
